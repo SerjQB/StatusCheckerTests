@@ -1,11 +1,15 @@
 <suite name="MySuite">
     <parameter name="browser" value="Chrome" />
-    <parameter name="domain" value="https://status.quickblox.com" />
+    <parameter name="domain" value="https://statusdev.quickblox.com" />
     <test name="FormTests" >
         <classes>
-        <class name="com.StatusCheckerTests.MainTest">
+        <class name="com.StatusCheckerTests.TeamTests">
             <methods>
-                <include name="smallTest" />
+                <include name="addValidUser" />
+                <include name="addValidUserWithoutPhone" />
+                <include name="editUser" />
+                <include name="deleteUser" />
+                <include name="checkFormValidation" />
             </methods>
         </class>
         </classes>

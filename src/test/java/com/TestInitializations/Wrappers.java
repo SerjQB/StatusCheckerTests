@@ -27,8 +27,7 @@ public abstract class Wrappers {
     }
 
     protected void waitUntilElement(By locator){
-        WebDriverWait wait = new WebDriverWait(getWebDriver(), 5);
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        new WebDriverWait(getWebDriver(), 5).until(ExpectedConditions.elementToBeClickable(locator));
     }
 
     protected void waitUntilElementNotPresented(By locator){
@@ -61,9 +60,7 @@ public abstract class Wrappers {
     }
 
 
-    protected String getText(By element){
-        return getWebDriver().findElement(element).getText();
-    }
+    protected String getText(By element){return getWebDriver().findElement(element).getText();}
 
     protected String getValue(By element){
         return getWebDriver().findElement(element).getAttribute("value");
@@ -77,8 +74,9 @@ public abstract class Wrappers {
         }
     }
 
-    protected Boolean isElementExist( By element){return (getWebDriver().findElements(element).size() != 0);
-    }
+    protected Boolean isElementExist( By element){return (getWebDriver().findElements(element).size() != 0);}
+
+    protected Boolean isElementDisplayed( By element){return (getWebDriver().findElement(element).isDisplayed());}
 
     protected Boolean isElementPresented(By element){
         Boolean elementCondition = false;
@@ -98,6 +96,12 @@ public abstract class Wrappers {
 
     protected void open(String url){
         getWebDriver().get(url);
+    }
+    protected void refreshPage(){
+        getWebDriver().navigate().refresh();
+    }
+    protected void goBack(){
+        getWebDriver().navigate().back();
     }
 
 }
