@@ -23,7 +23,7 @@ import org.testng.annotations.Parameters;
 public class BaseTest extends Wrappers {
 
     private static String currentBrowser = "Chrome" ;
-
+    private static String currentDomain = "https://status.quickblox.com";
 
     protected WebDriver driver;
 //    Setting chromedriver for Linux and Windows. Remember that names of executable drivers files are different
@@ -87,16 +87,22 @@ public class BaseTest extends Wrappers {
         return currentBrowser;
     }
 
+    static public String getCurrentDomain(){
+        return currentDomain;
+    }
+
     @Override
     public WebDriver getWebDriver() {
         return driver;
     }
 
-    @Parameters({"browser"})
+    @Parameters({"browser", "domain"})
     @BeforeTest
-    public void setUpBrowser(String browser)
+    public void setUpBrowserAndDomain(String browser, String domain)
     {
+
         this.currentBrowser = browser;
+        this.currentDomain = domain;
     }
 
     @BeforeMethod

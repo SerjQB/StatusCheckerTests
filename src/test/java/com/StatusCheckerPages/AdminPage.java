@@ -8,7 +8,7 @@ public class AdminPage extends BasePage{
     public AdminPage(WebDriver driver){super(driver);}
 
     public void visit(){
-        open("https://status.quickblox.com/admin");
+        open(currentDomain + "/admin");
     }
 
 }

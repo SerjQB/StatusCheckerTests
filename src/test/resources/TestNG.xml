@@ -1,5 +1,6 @@
 <suite name="MySuite">
     <parameter name="browser" value="Chrome" />
+    <parameter name="domain" value="https://status.quickblox.com" />
     <test name="FormTests" >
         <classes>
         <class name="com.StatusCheckerTests.MainTest">

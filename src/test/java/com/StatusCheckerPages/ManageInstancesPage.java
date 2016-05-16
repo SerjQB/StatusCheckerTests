@@ -9,7 +9,7 @@ public class ManageInstancesPage extends BasePage{
     public ManageInstancesPage(WebDriver driver){super(driver);}
 
     public void visit(){
-        open("https://status.quickblox.com/admin/instances");
+        open(currentDomain + "/admin/instances");
     }
 
     public int getNumberOfEnabledInstances(){

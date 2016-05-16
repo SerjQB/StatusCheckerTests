@@ -12,7 +12,7 @@ public class DisplayPage extends BasePage{
     public DisplayPage(WebDriver driver){super(driver);}
 
     public void visit(){
-        open("https://status.quickblox.com/admin/display");
+        open(currentDomain + "/admin/display");
     }
 
     public void waitForAllInstances(int numberOfInstances){

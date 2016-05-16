@@ -8,7 +8,7 @@ public class AddInstancePage extends BasePage{
     public AddInstancePage(WebDriver driver){super(driver);}
 
     public void visit(){
-        open("https://status.quickblox.com/admin/instances/add");
+        open(currentDomain + "/admin/instances/add");
     }
 
 }

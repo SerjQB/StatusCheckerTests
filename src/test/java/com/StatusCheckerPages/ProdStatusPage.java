@@ -22,7 +22,7 @@ public class ProdStatusPage extends ApplicationStatusPage{
     }
 
     public void visit(){
-        open("https://status.quickblox.com");
+        open(currentDomain);
         waitUntilLoad();
     }
 

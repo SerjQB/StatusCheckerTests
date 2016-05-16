@@ -8,7 +8,7 @@ public class TeamsPage extends BasePage{
     public TeamsPage(WebDriver driver){super(driver);}
 
     public void visit(){
-        open("https://status.quickblox.com/admin/teams");
+        open(currentDomain + "/admin/teams");
     }
 
 }

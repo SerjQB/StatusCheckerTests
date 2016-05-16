@@ -43,7 +43,7 @@ public class ApplicationStatusPage extends BasePage {
     public ApplicationStatusPage(WebDriver driver){super(driver);}
 
     public void visit(String applicationName){
-        open("https://status.quickblox.com/instance/" + applicationName);
+        open(currentDomain + "/instance/" + applicationName);
         waitUntilLoad();
     }
 

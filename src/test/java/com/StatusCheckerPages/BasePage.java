@@ -10,6 +10,8 @@ public class BasePage extends Wrappers {
 
     protected String openedBrowser = MainTest.getCurrentBrowser();
 
+    protected String currentDomain = MainTest.getCurrentDomain();
+
     private By logoLoadLocator = findByCss("qbLogo.loading");
 
     protected WebDriver driver;
@@ -29,42 +31,42 @@ public class BasePage extends Wrappers {
     }
 
     public AddInstancePage openAddInstancePage(){
-        open("https://status.quickblox.com/admin/instances/add");
+        open(currentDomain + "/admin/instances/add");
         return  new AddInstancePage(driver);
     }
 
     public AdminPage openAdminPage(){
-        open("https://status.quickblox.com/admin");
+        open(currentDomain + "/admin");
         return  new AdminPage(driver);
     }
 
     public ApplicationStatusPage openApplicationStatusPage(String instanceName){
-        open("https://status.quickblox.com/instance/" + instanceName);
+        open(currentDomain + "/instance/" + instanceName);
         return  new ApplicationStatusPage(driver);
     }
 
     public DisplayPage openDisplayPage(){
-        open("https://status.quickblox.com/admin/display");
+        open(currentDomain + "/admin/display");
         return  new DisplayPage(driver);
     }
 
     public EditInstancePage openEditInstancePage(String instanceName){
-        open("https://status.quickblox.com/admin/instances/"+ instanceName);
+        open(currentDomain + "/admin/instances/"+ instanceName);
         return  new EditInstancePage(driver);
     }
 
     public ManageInstancesPage openManageInstancesPage(){
-        open("https://status.quickblox.com/admin/instances");
+        open(currentDomain + "/admin/instances");
         return  new ManageInstancesPage(driver);
     }
 
     public ProdStatusPage openProdStatusPage(){
-        open("https://status.quickblox.com");
+        open(currentDomain);
         return  new ProdStatusPage(driver);
     }
 
     public TeamsPage openTeamsPage(){
-        open("https://status.quickblox.com/admin/teams");
+        open(currentDomain + "/admin/teams");
         return  new TeamsPage(driver);
     }
 
