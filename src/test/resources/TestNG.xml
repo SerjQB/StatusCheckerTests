@@ -1,0 +1,15 @@
+<suite name="MySuite">
+    <parameter name="browser" value="Chrome" />
+    <test name="FormTests" >
+        <classes>
+        <class name="com.StatusCheckerTests.MainTest">
+            <methods>
+                <include name="smallTest" />
+            </methods>
+        </class>
+        </classes>
+    </test>
+</suite>
+
+
+
