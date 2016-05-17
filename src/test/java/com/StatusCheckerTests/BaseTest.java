@@ -54,13 +54,21 @@ public class BaseTest extends Wrappers {
     }
 
     // Remember that names of executable drivers files are different for different OSes
-    protected  WebDriver setFirefoxDriver(){
-        String pathToFirefoxDriver = Paths.get("./src/test/resources/MarionetteDriver/wires").toAbsolutePath().toString();
-        System.setProperty("webdriver.gecko.driver", pathToFirefoxDriver);
-        MarionetteDriver marionetteDriver = new MarionetteDriver();
-        marionetteDriver.manage().window().maximize();
+//    protected  WebDriver setFirefoxDriver(){
+//        String pathToFirefoxDriver = Paths.get("./src/test/resources/MarionetteDriver/wires").toAbsolutePath().toString();
+//        System.setProperty("webdriver.gecko.driver", pathToFirefoxDriver);
+//        WebDriver marionetteDriver = new MarionetteDriver();
+//        marionetteDriver.manage().window().maximize();
+//
+//        return marionetteDriver;
+//    }
 
-        return marionetteDriver;
+    protected  WebDriver setFirefoxDriver(){
+
+        FirefoxDriver firefoxDriver = new FirefoxDriver();
+        firefoxDriver.manage().window().maximize();
+
+        return firefoxDriver;
     }
 
     // Before use Safari driver - you should download the latest version from here - http://www.seleniumhq.org/download/
@@ -120,6 +128,6 @@ public class BaseTest extends Wrappers {
 
     @AfterMethod
     public void tearDown(){
-        driver.close();
+        driver.quit();
     }
 }

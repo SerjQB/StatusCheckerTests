@@ -5,6 +5,11 @@ import org.openqa.selenium.By;
 
 public class ManageInstancesPage extends BasePage{
 
+    private By devLocatorForActiveInstances = findByXPath("//a[descendant::*[@class='enabled']][descendant::*[@class='location'][contains(text(), 'us')]]");
+    private By enabledInstancesLocator = findByCss(".enabled");
+    private By disabledInstancesLocator = findByCss(".disabled");
+    private By allInstancesLocator = findByCss(".name");
+    private By addInstanceButtonLocator = findById("add-team-member");
 
     public ManageInstancesPage(WebDriver driver){super(driver);}
 
@@ -13,14 +18,24 @@ public class ManageInstancesPage extends BasePage{
     }
 
     public int getNumberOfEnabledInstances(){
-        return getCountOfCssElements(".enabled");
+        return getCountOfElements(enabledInstancesLocator);
     }
 
     public int getNumberOfDisabledInstances(){
-        return getCountOfCssElements(".disabled");
+        return getCountOfElements(disabledInstancesLocator);
     }
 
     public int getNumberOfAllInstances(){
-        return getCountOfCssElements(".name");
+        return getCountOfElements(allInstancesLocator);
     }
+
+    public int getNumberOfDevInstances(){
+        return getCountOfElements(devLocatorForActiveInstances);
+    }
+
+    public EditInstancePage openInstance(String instanceName){
+        click(findByXPath("//a[@href='/admin/instances/" + instanceName + "']"));
+        return new EditInstancePage(driver);
+    }
+
 }
