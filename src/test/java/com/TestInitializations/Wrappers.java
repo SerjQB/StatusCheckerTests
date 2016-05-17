@@ -40,6 +40,8 @@ public abstract class Wrappers {
 
     protected int getCountOfCssElements(String locator){return getWebDriver().findElements(By.cssSelector(locator)).size();}
 
+    protected int getCountOfElements(By locator){return getWebDriver().findElements(locator).size();}
+
     protected void type(By field, String value){
         getWebDriver().findElement(field).sendKeys(value);
     }
