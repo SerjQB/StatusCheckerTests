@@ -61,6 +61,29 @@ public abstract class Wrappers {
         alert.accept();
     }
 
+    protected Boolean isChecked(By locator){return getWebDriver().findElement(locator).isSelected();}
+
+    protected void interactWithCheckbox(By locator, Boolean condition){
+        WebElement checkbox = getWebDriver().findElement(locator);
+        if(condition) {
+            if (!isChecked(locator))
+                getWebDriver().findElement(locator).click();
+        }
+        else{
+            if (isChecked(locator))
+                getWebDriver().findElement(locator).click();
+        }
+    }
+
+    protected void selectByValue(By locator, String value){
+        Select select = new Select(getWebDriver().findElement(locator));
+        select.selectByValue(value);
+    }
+
+    protected void selectByText(By locator, String text){
+        Select select = new Select(getWebDriver().findElement(locator));
+        select.selectByVisibleText(text);
+    }
 
     protected String getText(By element){return getWebDriver().findElement(element).getText();}
 
@@ -78,7 +101,6 @@ public abstract class Wrappers {
 
     protected Boolean isElementExist( By element){return (getWebDriver().findElements(element).size() != 0);}
 
-    protected Boolean isElementDisplayed( By element){return (getWebDriver().findElement(element).isDisplayed());}
 
     protected Boolean isElementPresented(By element){
         Boolean elementCondition = false;

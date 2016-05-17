@@ -7,7 +7,7 @@ import com.StatusCheckerPages.*;
 public class DisplayPageTests extends BaseTest {
 
     @Test
-    public void testNumberOfActiveInstances() {
+    public void checkNumberOfActiveInstances() {
         int numberOfEnabledInstances;
 
         ManageInstancesPage manageInstancesPage = new ManageInstancesPage(driver);
@@ -16,7 +16,7 @@ public class DisplayPageTests extends BaseTest {
         DisplayPage displayPage = manageInstancesPage.openDisplayPage();
         displayPage.visit();
         displayPage.waitForAllInstances(numberOfEnabledInstances);
-        Assert.assertEquals(displayPage.getNumberInCounter(), (numberOfEnabledInstances));
+        Assert.assertEquals(displayPage.getNumberInCounter(), numberOfEnabledInstances);
         Assert.assertEquals(displayPage.getNumberOfGraphs(), numberOfEnabledInstances);
     }
 

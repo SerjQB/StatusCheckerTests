@@ -1,5 +1,6 @@
 package com.StatusCheckerPages;
 
+import org.apache.xpath.operations.Bool;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 
@@ -59,5 +60,75 @@ public class AddInstancePage extends BasePage{
     public void visit(){
         open(currentDomain + "/admin/instances/add");
     }
+
+    public void checkEnabledCheckbox(Boolean action){
+        interactWithCheckbox(enabledCheckboxLocator, action);
+    }
+
+    public void checkSelectDeselectCheckbox(Boolean action){interactWithCheckbox(selectDeselectCheckboxLocator, action);}
+
+    public void checkForceDeletion(Boolean action){interactWithCheckbox(forceDeletionDialogCheckboxLocator, action);}
+
+    public void fillRequiredFields(String name, String abbreviation, String location,
+                                   String plan, String apiMs, String xmppMs,
+                                   String statistics, String adminLogin, String adminPass){
+        clearAndType(nameFieldLocator, name);
+        clearAndType(abbreviationFieldLocator, abbreviation);
+        selectByValue(locationDropdownLocator, location);
+        selectByValue(planDropdownLocator, plan);
+        clearAndType(apiMsFieldLocator, apiMs);
+        clearAndType(xmppMsFieldLocator, xmppMs);
+        clearAndType(statisticsFieldLocator, statistics);
+        clearAndType(adminLoginFieldLocator, adminLogin);
+        clearAndType(adminPassFieldLocator, adminPass);
+    }
+
+    public void checkModuleCheckboxes(Boolean createSession, Boolean createUser, Boolean createUserSession,
+                                      Boolean listUsers, Boolean updateUser, Boolean deleteUser, Boolean destroySession,
+                                      Boolean createGeodata, Boolean listGeodata, Boolean createAndUploadContent,
+                                      Boolean listContent, Boolean deleteContent, Boolean createData,
+                                      Boolean updateData, Boolean listData, Boolean deleteData,
+                                      Boolean createDialog, Boolean connectToChat, Boolean privateChat,
+                                      Boolean privChatWithoutHis, Boolean privChatHl, Boolean groupChat,
+                                      Boolean retrieveDialogs, Boolean removeDialogsOccup, Boolean addDialogOccup,
+                                      Boolean createMessage, Boolean listMessages, Boolean deleteMessages,
+                                      Boolean deleteDialog){
+        interactWithCheckbox(createSessionCheckboxLocator, createSession);
+        interactWithCheckbox(createUserCheckboxLocator, createUser);
+        interactWithCheckbox(createUserSessionCheckboxLocator, createUserSession);
+        interactWithCheckbox(listUsersCheckboxLocator, listUsers);
+        interactWithCheckbox(updateUserCheckboxLocator, updateUser);
+        interactWithCheckbox(deleteUserCheckboxLocator, deleteUser);
+        interactWithCheckbox(destroySessionCheckboxLocator, destroySession);
+
+        interactWithCheckbox(createGeodataCheckboxLocator, createGeodata);
+        interactWithCheckbox(listGeodataCheckboxLocator, listGeodata);
+
+        interactWithCheckbox(createAndUploadContentCheckboxLocator, createAndUploadContent);
+        interactWithCheckbox(listContentCheckboxLocator, listContent);
+        interactWithCheckbox(deleteContentCheckboxLocator, deleteContent);
+
+        interactWithCheckbox(createDataCheckboxLocator, createData);
+        interactWithCheckbox(updateDataCheckboxLocator, updateData);
+        interactWithCheckbox(listDataCheckboxLocator, listData);
+        interactWithCheckbox(deleteDataCheckboxLocator, deleteData);
+
+        interactWithCheckbox(createDialogCheckboxLocator, createDialog);
+        interactWithCheckbox(connectToChatCheckboxLocator, connectToChat);
+        interactWithCheckbox(privateChatCheckboxLocator, privateChat);
+        interactWithCheckbox(privateChatWithoutHistoryCheckboxLocator, privChatWithoutHis);
+        interactWithCheckbox(privateChatHeadlineCheckboxLocator, privChatHl);
+        interactWithCheckbox(groupChatCheckboxLocator, groupChat);
+        interactWithCheckbox(retrieveDialogsCheckboxLocator, retrieveDialogs);
+        interactWithCheckbox(removeDialogOccupantCheckboxLocator, removeDialogsOccup);
+        interactWithCheckbox(addDialogOccupantCheckboxLocator, addDialogOccup);
+        interactWithCheckbox(createMessageCheckboxLocator, createMessage);
+        interactWithCheckbox(listMessagesCheckboxLocator, listMessages);
+        interactWithCheckbox(deleteMessageCheckboxLocator, deleteMessages);
+        interactWithCheckbox(deleteDialogCheckboxLocator, deleteDialog);
+    }
+
+    public void clickGenerateInstanceButton(){click(generateInstanceButtonLocator);}
+
 
 }

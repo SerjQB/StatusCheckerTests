@@ -7,13 +7,13 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.Dimension;
 import com.TestInitializations.Wrappers;
 
+
 import java.util.Random;
 import java.util.UUID;
 import java.nio.file.*;
 import java.awt.Toolkit;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.MarionetteDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -36,8 +36,6 @@ public class BaseTest extends Wrappers {
 //        return chromeDriver;
 //    }
 
-
-
 //    Setting chromedriver for Mac
     protected  WebDriver setChromeDriver(){
         String pathToChromeDriver = Paths.get("./src/test/resources/ChromeDriver/chromedriver_mac").toAbsolutePath().toString();
@@ -53,15 +51,6 @@ public class BaseTest extends Wrappers {
         return chromeDriver;
     }
 
-    // Remember that names of executable drivers files are different for different OSes
-//    protected  WebDriver setFirefoxDriver(){
-//        String pathToFirefoxDriver = Paths.get("./src/test/resources/MarionetteDriver/wires").toAbsolutePath().toString();
-//        System.setProperty("webdriver.gecko.driver", pathToFirefoxDriver);
-//        WebDriver marionetteDriver = new MarionetteDriver();
-//        marionetteDriver.manage().window().maximize();
-//
-//        return marionetteDriver;
-//    }
 
     protected  WebDriver setFirefoxDriver(){
 
@@ -70,6 +59,8 @@ public class BaseTest extends Wrappers {
 
         return firefoxDriver;
     }
+
+
 
     // Before use Safari driver - you should download the latest version from here - http://www.seleniumhq.org/download/
     // and add him to your Safari browser as browser extension

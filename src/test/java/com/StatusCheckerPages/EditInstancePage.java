@@ -9,6 +9,8 @@ public class EditInstancePage extends ManageInstancesPage{
     private By checkCountsLocator = findByXPath("//*[@class='label'][contains(text(), 'Latest check')]/preceding-sibling::div");
     private By daysRunningLocator = findByXPath("//*[@class='label'][contains(text(), 'Latest check')]/preceding-sibling::div");
     private By modulesEnabledLocator = findByXPath("//*[@class='label'][contains(text(), 'Latest check')]/preceding-sibling::div");
+    private By saveInstanceButtonLocator = findById("save_instance");
+    private By deleteInstanceButtonLocator = findById("delete_instance");
 
     public EditInstancePage(WebDriver driver){super(driver);}
 
@@ -24,6 +26,9 @@ public class EditInstancePage extends ManageInstancesPage{
 
     public String getModulesEnabledNumber(){return getText(modulesEnabledLocator).replaceAll(" ", "");}
 
+    public void clickSaveInstanceButton(){click(saveInstanceButtonLocator);}
+
+    public void clickDeleteInstanceButton(){click(deleteInstanceButtonLocator);}
 }
 
 
