@@ -24,6 +24,7 @@ public class InstancesTests extends BaseTest {
         Assert.assertEquals(latestMetrics.size()-1, enabledMetrics.length);
         for(String s : enabledMetrics){
             Assert.assertEquals(applicationStatusPage.getValueOfMetric(enabledMetrics[loopOperator]), latestMetrics.get(enabledMetrics[loopOperator]).toString());
+            loopOperator++;
         }
     }
 }

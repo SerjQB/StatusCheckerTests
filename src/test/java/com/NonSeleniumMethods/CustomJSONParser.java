@@ -26,8 +26,7 @@ public class CustomJSONParser {
             String json = EntityUtils.toString(result.getEntity(), "UTF-8");
             try {
                 JSONParser parser = new JSONParser();
-                Object resultObject = parser.parse(json);
-                JSONObject jsonObject = (JSONObject) resultObject;
+                JSONObject jsonObject = (JSONObject) parser.parse(json);
                 JSONArray jsonArray = (JSONArray) jsonObject.get("metrics");
                 obj = (JSONObject) jsonArray.get(0);
                 obj = (JSONObject) obj.get("metrics");
