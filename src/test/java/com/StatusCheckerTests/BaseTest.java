@@ -110,10 +110,10 @@ public class BaseTest extends Wrappers {
         if(currentBrowser.equals("Chrome"))
             driver = setChromeDriver();
 
-        if(currentBrowser.equals("Firefox"))
+        else if(currentBrowser.equals("Firefox"))
             driver = setFirefoxDriver();
 
-        if(currentBrowser.equals("Safari"))
+        else if(currentBrowser.equals("Safari"))
             driver = setSafariDriver();
     }
 

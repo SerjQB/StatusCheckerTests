@@ -51,7 +51,7 @@ public class CustomJSONParser {
                 JSONParser parser = new JSONParser();
                 JSONObject jsonObject = (JSONObject) parser.parse(json);
                 JSONArray jsonArray = (JSONArray) jsonObject.get("healthcheck");
-                jsonObject = (JSONObject) jsonArray.get(287);
+                jsonObject = (JSONObject) jsonArray.get(0);
                 healthcheck = jsonObject.get("time").toString();
 
             } catch (Exception e) {
@@ -61,6 +61,50 @@ public class CustomJSONParser {
         }
 
         return healthcheck;
+    }
+
+    public static String getAdminStatisticsMetric(String metric) {
+        String statValue = "";
+        String metricLocate = "";
+        try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
+            HttpGet request = new HttpGet(currentDomain + "/instance/prod" + "/latest.json");
+            HttpResponse result = httpClient.execute(request);
+
+            String json = EntityUtils.toString(result.getEntity(), "UTF-8");
+            try {
+                JSONParser parser = new JSONParser();
+                JSONObject jsonObject = (JSONObject) parser.parse(json);
+                JSONArray jsonArray = (JSONArray) jsonObject.get("metrics");
+                jsonObject = (JSONObject) jsonArray.get(0);
+                jsonObject = (JSONObject) jsonObject.get("stats");
+                if(metric.equals("CPUUsage")){
+                    metricLocate = "chatc";
+                }
+
+                else if(metric.equals("MessagesNumberPerSec")){
+                    metricLocate = "chatm";
+                }
+
+                else if(metric.equals("PresencesNumberPerSec")){
+                    metricLocate = "chatp";
+                }
+
+                else if(metric.equals("QueueSize")){
+                    metricLocate = "chatq";
+                }
+
+                else if(metric.equals("ConnectionsNumber")){
+                    metricLocate = "chatu";
+                }
+                jsonArray = (JSONArray) jsonObject.get(metricLocate);
+                statValue = jsonArray.get(0).toString();
+            } catch (Exception e) {
+            }
+
+        } catch (IOException ex) {
+        }
+
+        return statValue;
     }
 
     public static int getCountOfMetrics(String applicationName){

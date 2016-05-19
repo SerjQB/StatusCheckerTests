@@ -7,7 +7,11 @@ import com.NonSeleniumMethods.CustomJSONParser;
 
 
 public class InstancesTests extends BaseTest {
-
+    private static final String cpuUsageStat = "CPUUsage";
+    private static final String messagesNumberPerSecondStat = "MessagesNumberPerSec";
+    private static final String presencesNumberPerSecStat = "PresencesNumberPerSec";
+    private static final String queueSizeStat = "QueueSize";
+    private static final String connectionsNumberStat = "ConnectionsNumber";
 
     @Test
     public void checkInstanceMetricsDisplaying() {
@@ -50,4 +54,23 @@ public class InstancesTests extends BaseTest {
         Assert.assertEquals(applicationStatusPage.getHealthCheckValue(),
                 CustomJSONParser.getHealthCheckValue(applicationName));
     }
+
+    @Test
+    public void checkAdminStatsDisplaying() {
+
+        ProdStatusPage prodStatusPage = new ProdStatusPage(driver);
+        prodStatusPage.visit();
+
+        Assert.assertEquals(prodStatusPage.getAdminStat(cpuUsageStat),
+                CustomJSONParser.getAdminStatisticsMetric(cpuUsageStat));
+        Assert.assertEquals(prodStatusPage.getAdminStat(messagesNumberPerSecondStat),
+                CustomJSONParser.getAdminStatisticsMetric(messagesNumberPerSecondStat));
+        Assert.assertEquals(prodStatusPage.getAdminStat(presencesNumberPerSecStat),
+                CustomJSONParser.getAdminStatisticsMetric(presencesNumberPerSecStat));
+        Assert.assertEquals(prodStatusPage.getAdminStat(queueSizeStat),
+                CustomJSONParser.getAdminStatisticsMetric(queueSizeStat));
+        Assert.assertEquals(prodStatusPage.getAdminStat(connectionsNumberStat),
+                CustomJSONParser.getAdminStatisticsMetric(connectionsNumberStat));
+    }
+
 }

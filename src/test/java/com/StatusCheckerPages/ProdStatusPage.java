@@ -4,12 +4,6 @@ import org.openqa.selenium.By;
 
 public class ProdStatusPage extends ApplicationStatusPage{
 
-    private String CPUUsage = "#chatc";
-    private String MessagesNumberPerSecond = "#chatm";
-    private String PresencesNumberPerSecond = "#chatp";
-    private String QueueSize = "#chatq";
-    private String ConnectionsNumber = "#chatu";
-
     private By CPUUsageLocator = findById("chatc");
     private By MessagesNumberPerSecondLocator = findById("chatm");
     private By PresencesNumberPerSecondLocator = findById("chatp");
@@ -24,7 +18,12 @@ public class ProdStatusPage extends ApplicationStatusPage{
     public void visit(){
         open(currentDomain + "/instance/prod");
         waitUntilLoad();
+        waitUntilElement(CPUUsageLocator);
     }
 
+    public String getAdminStat(String statName){
+        return getText(findByXPath("//span[text()='"
+                + statName + "']/ancestor::*[@data-obj]//span[@class = 'time pass']"));
+    }
 
 }
