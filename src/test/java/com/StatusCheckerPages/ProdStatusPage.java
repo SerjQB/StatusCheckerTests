@@ -22,7 +22,7 @@ public class ProdStatusPage extends ApplicationStatusPage{
     }
 
     public void visit(){
-        open(currentDomain);
+        open(currentDomain + "/instance/prod");
         waitUntilLoad();
     }
 

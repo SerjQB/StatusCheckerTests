@@ -2,6 +2,7 @@ package com.StatusCheckerPages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 
+
 public class ApplicationStatusPage extends BasePage {
 
     protected By titleFieldLocator = findByCss(".page-title strong");
@@ -40,30 +41,33 @@ public class ApplicationStatusPage extends BasePage {
     protected By pushAndroidLocator = findById("android");
     protected By pushiosLocator = findById("ios");
 
-    public ApplicationStatusPage(WebDriver driver){super(driver);}
 
-    public void visit(String applicationName){
+    public ApplicationStatusPage(WebDriver driver) {
+        super(driver);
+    }
+
+    public void visit(String applicationName) {
         open(currentDomain + "/instance/" + applicationName);
         waitUntilLoad();
     }
 
-    public void clickOnRefreshButton(){
+    public String getValueOfMetric(String metricName){return getText(findByCss("#" + metricName + " .time "));}
+
+    public void clickOnRefreshButton() {
         click(refreshButtonLocator);
         waitUntilLoad();
     }
 
-    public void openCalendar(){
+    public void openCalendar() {
         click(calendarButtonLocator);
     }
 
-    public void clickOnExpandAllButton(){
+    public void clickOnExpandAllButton() {
         click(expandAllButtonLocator);
     }
 
-    public void clickOnFullScreenButton(){
+    public void clickOnFullScreenButton() {
         click(fullScreenButtonLocator);
     }
-
-
 
 }

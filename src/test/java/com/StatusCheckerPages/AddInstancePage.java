@@ -3,6 +3,9 @@ package com.StatusCheckerPages;
 import org.apache.xpath.operations.Bool;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
+import org.json.simple.JSONObject;
+
+import java.lang.reflect.Array;
 
 public class AddInstancePage extends BasePage{
 
@@ -67,7 +70,7 @@ public class AddInstancePage extends BasePage{
 
     public void checkSelectDeselectCheckbox(Boolean action){interactWithCheckbox(selectDeselectCheckboxLocator, action);}
 
-    public void checkForceDeletion(Boolean action){interactWithCheckbox(forceDeletionDialogCheckboxLocator, action);}
+    public void checkForceDeletionCheckbox(Boolean action){interactWithCheckbox(forceDeletionDialogCheckboxLocator, action);}
 
     public void fillRequiredFields(String name, String abbreviation, String location,
                                    String plan, String apiMs, String xmppMs,
@@ -83,7 +86,7 @@ public class AddInstancePage extends BasePage{
         clearAndType(adminPassFieldLocator, adminPass);
     }
 
-    public void checkModuleCheckboxes(Boolean createSession, Boolean createUser, Boolean createUserSession,
+    public void checkModulesCheckboxes(Boolean createSession, Boolean createUser, Boolean createUserSession,
                                       Boolean listUsers, Boolean updateUser, Boolean deleteUser, Boolean destroySession,
                                       Boolean createGeodata, Boolean listGeodata, Boolean createAndUploadContent,
                                       Boolean listContent, Boolean deleteContent, Boolean createData,
@@ -129,6 +132,5 @@ public class AddInstancePage extends BasePage{
     }
 
     public void clickGenerateInstanceButton(){click(generateInstanceButtonLocator);}
-
 
 }

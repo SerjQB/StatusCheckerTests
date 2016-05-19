@@ -10,7 +10,7 @@ public class BasePage extends Wrappers {
 
     protected String openedBrowser = MainTest.getCurrentBrowser();
 
-    protected String currentDomain = MainTest.getCurrentDomain();
+    public static String currentDomain = MainTest.getCurrentDomain();
 
     private By logoLoadLocator = findByCss("qbLogo.loading");
 
