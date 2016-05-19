@@ -40,6 +40,8 @@ public class ApplicationStatusPage extends BasePage {
     protected By deleteDialogLocator = findById("deleteDialog");
     protected By pushAndroidLocator = findById("android");
     protected By pushiosLocator = findById("ios");
+    protected By healthCheckLocator = findByCss("#healthcheck .time");
+    protected By metricsCounterLocator = findByXPath("//span[@class='title'][not(text()='Healthcheck' and not(contains(text(), 'Push')))][ancestor::*[@data-obj]]");
 
 
     public ApplicationStatusPage(WebDriver driver) {
@@ -49,9 +51,14 @@ public class ApplicationStatusPage extends BasePage {
     public void visit(String applicationName) {
         open(currentDomain + "/instance/" + applicationName);
         waitUntilLoad();
+        waitUntilElement(healthCheckLocator);
     }
 
     public String getValueOfMetric(String metricName){return getText(findByCss("#" + metricName + " .time "));}
+
+    public String getHealthCheckValue(){return getText(healthCheckLocator);}
+
+    public int getCountOfMetrics(){return getCountOfElements(metricsCounterLocator);}
 
     public void clickOnRefreshButton() {
         click(refreshButtonLocator);

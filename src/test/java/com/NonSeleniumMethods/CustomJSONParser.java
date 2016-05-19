@@ -15,9 +15,9 @@ import java.io.IOException;
 
 public class CustomJSONParser {
 
-    private String currentDomain = BasePage.currentDomain;
+    private static String currentDomain = BasePage.currentDomain;
 
-    public JSONObject getLatestMetricsObject(String applicationName) {
+    public static JSONObject getLatestMetricsObject(String applicationName) {
         JSONObject obj = null;
         try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
             HttpGet request = new HttpGet(currentDomain + "/instance/" + applicationName + "/latest.json");
@@ -38,5 +38,32 @@ public class CustomJSONParser {
         }
 
         return obj;
+    }
+
+    public static String  getHealthCheckValue(String applicationName) {
+        String healthcheck = "";
+        try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
+            HttpGet request = new HttpGet(currentDomain + "/instance/" + applicationName + "/latest.json");
+            HttpResponse result = httpClient.execute(request);
+
+            String json = EntityUtils.toString(result.getEntity(), "UTF-8");
+            try {
+                JSONParser parser = new JSONParser();
+                JSONObject jsonObject = (JSONObject) parser.parse(json);
+                JSONArray jsonArray = (JSONArray) jsonObject.get("healthcheck");
+                jsonObject = (JSONObject) jsonArray.get(287);
+                healthcheck = jsonObject.get("time").toString();
+
+            } catch (Exception e) {
+            }
+
+        } catch (IOException ex) {
+        }
+
+        return healthcheck;
+    }
+
+    public static int getCountOfMetrics(String applicationName){
+        return getLatestMetricsObject(applicationName).size();
     }
 }

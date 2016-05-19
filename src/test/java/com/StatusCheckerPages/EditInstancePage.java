@@ -33,10 +33,10 @@ public class EditInstancePage extends AddInstancePage{
     public void clickDeleteInstanceButton(){click(deleteInstanceButtonLocator);}
 
     public String[] getMetricsNameArray(){
-        String[] arr = new String[getCountOfElements(checkedMetricsCounter)];
+        String[] arr = new String[getCountOfEnabledMetrics()];
         int counter = 0;
 
-        if(isChecked(createSessionCheckboxLocator)){
+        if(isChecked(createUserCheckboxLocator)) {
             arr[counter] = "createSession";
             counter++;
         }
@@ -183,6 +183,8 @@ public class EditInstancePage extends AddInstancePage{
 
         return arr;
     }
+
+    public int getCountOfEnabledMetrics(){return getCountOfElements(checkedMetricsCounter);}
 
 }
 

@@ -10,7 +10,7 @@ public class InstancesTests extends BaseTest {
 
 
     @Test
-    public void checkInstanceDisplaying() {
+    public void checkInstanceMetricsDisplaying() {
         int loopOperator = 0;
         String applicationName = "novochatqa";
         EditInstancePage editInstancePage = new EditInstancePage(driver);
@@ -18,13 +18,36 @@ public class InstancesTests extends BaseTest {
         String[] enabledMetrics = editInstancePage.getMetricsNameArray();
 
         ApplicationStatusPage applicationStatusPage = editInstancePage.openApplicationStatusPage(applicationName);
-        CustomJSONParser customJSONParser = new CustomJSONParser();
-        JSONObject latestMetrics = customJSONParser.getLatestMetricsObject(applicationName);
+        JSONObject latestMetrics = CustomJSONParser.getLatestMetricsObject(applicationName);
 
-        Assert.assertEquals(latestMetrics.size()-1, enabledMetrics.length);
         for(String s : enabledMetrics){
-            Assert.assertEquals(applicationStatusPage.getValueOfMetric(enabledMetrics[loopOperator]), latestMetrics.get(enabledMetrics[loopOperator]).toString());
+            Assert.assertEquals(applicationStatusPage.getValueOfMetric(enabledMetrics[loopOperator]),
+                    latestMetrics.get(enabledMetrics[loopOperator]).toString());
             loopOperator++;
         }
+    }
+
+    @Test
+    public void checkInstanceMetricsCount() {
+        String applicationName = "novochatqa";
+        EditInstancePage editInstancePage = new EditInstancePage(driver);
+        editInstancePage.visit(applicationName);
+        String[] enabledMetrics = editInstancePage.getMetricsNameArray();
+
+        ApplicationStatusPage applicationStatusPage = editInstancePage.openApplicationStatusPage(applicationName);
+
+        Assert.assertEquals(CustomJSONParser.getCountOfMetrics(applicationName), enabledMetrics.length);
+        Assert.assertEquals(applicationStatusPage.getCountOfMetrics(), enabledMetrics.length);
+    }
+
+    @Test
+    public void checkInstanceHealthCheckDisplaying() {
+        String applicationName = "novochatqa";
+
+        ApplicationStatusPage applicationStatusPage = new ApplicationStatusPage(driver);
+        applicationStatusPage.visit(applicationName);
+
+        Assert.assertEquals(applicationStatusPage.getHealthCheckValue(),
+                CustomJSONParser.getHealthCheckValue(applicationName));
     }
 }
