@@ -6,7 +6,7 @@ import com.TestInitializations.Wrappers;
 import com.StatusCheckerTests.BaseTest;
 
 
-public class BasePage extends Wrappers {
+public abstract class BasePage extends Wrappers {
 
     protected String openedBrowser = BaseTest.getCurrentBrowser();
 

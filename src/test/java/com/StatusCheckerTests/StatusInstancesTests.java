@@ -15,10 +15,17 @@ public class StatusInstancesTests extends BaseTest {
     private static final String queueSizeStat = "QueueSize";
     private static final String connectionsNumberStat = "ConnectionsNumber";
 
+    private String applicationName;
+
+    @Parameters({"appName"})
+    @BeforeMethod
+    public void setApplicationName(String appName){
+        applicationName = appName;
+    }
+
     @Test
     public void checkInstanceMetricsDisplaying() {
         int loopOperator = 0;
-        String applicationName = "novochatqa";
         EditInstancePage editInstancePage = new EditInstancePage(driver);
         editInstancePage.visit(applicationName);
         String[] enabledMetrics = editInstancePage.getMetricsNameArray();
@@ -35,7 +42,6 @@ public class StatusInstancesTests extends BaseTest {
 
     @Test
     public void checkInstanceMetricsCount() {
-        String applicationName = "novochatqa";
         EditInstancePage editInstancePage = new EditInstancePage(driver);
         editInstancePage.visit(applicationName);
         String[] enabledMetrics = editInstancePage.getMetricsNameArray();
@@ -48,7 +54,6 @@ public class StatusInstancesTests extends BaseTest {
 
     @Test
     public void checkInstanceHealthCheckDisplaying() {
-        String applicationName = "novochatqa";
 
         ApplicationStatusPage applicationStatusPage = new ApplicationStatusPage(driver);
         applicationStatusPage.visit(applicationName);
@@ -79,7 +84,6 @@ public class StatusInstancesTests extends BaseTest {
     public void fullScreenWithHiddenGraphs() {
         double compressedWidth;
         double fullScreenWidth;
-        String applicationName = "novochatqa";
 
         ApplicationStatusPage applicationStatusPage = new ApplicationStatusPage(driver);
         applicationStatusPage.visit(applicationName);
@@ -100,7 +104,6 @@ public class StatusInstancesTests extends BaseTest {
     @Test
     public void expandAllGraphs() {
         int graphsNumber;
-        String applicationName = "novochatqa";
 
         ApplicationStatusPage applicationStatusPage = new ApplicationStatusPage(driver);
         applicationStatusPage.visit(applicationName);
@@ -122,7 +125,6 @@ public class StatusInstancesTests extends BaseTest {
         double compressedWidth;
         double fullScreenWidth;
         int graphsNumber;
-        String applicationName = "novochatqa";
 
         ApplicationStatusPage applicationStatusPage = new ApplicationStatusPage(driver);
         applicationStatusPage.visit(applicationName);
@@ -133,22 +135,22 @@ public class StatusInstancesTests extends BaseTest {
         applicationStatusPage.waitForExpandedGraphs();
         applicationStatusPage.clickOnFullScreenButton();
         applicationStatusPage.waitForFullScreen();
-        applicationStatusPage.waitForExpandedChangeScreen();
         pause(1000);
+        applicationStatusPage.waitForExpandedChangeScreen();
         fullScreenWidth = applicationStatusPage.getContentWidth();
         Assert.assertTrue(compressedWidth * 1.5 < fullScreenWidth);
-        Assert.assertEquals(applicationStatusPage.getCountOfExpandedGraphs(), graphsNumber);
+        Assert.assertEquals(applicationStatusPage.getCountOfFullScreenExpandedGraphs(), graphsNumber);
 
         applicationStatusPage.clickOnFullScreenButton();
         applicationStatusPage.waitForExpandedChangeScreen();
         pause(1000);
+        Assert.assertEquals(applicationStatusPage.getCountOfFullScreenExpandedGraphs(), graphsNumber);
         Assert.assertTrue(fullScreenWidth > applicationStatusPage.getContentWidth() * 1.5);
     }
 
     @Test
     public void openAllGraphsManually() {
         int graphsNumber;
-        String applicationName = "novochatqa";
 
         ApplicationStatusPage applicationStatusPage = new ApplicationStatusPage(driver);
         applicationStatusPage.visit(applicationName);
@@ -164,7 +166,6 @@ public class StatusInstancesTests extends BaseTest {
     @Test
     public void hideAllGraphsManually() {
         int graphsNumber;
-        String applicationName = "novochatqa";
 
         ApplicationStatusPage applicationStatusPage = new ApplicationStatusPage(driver);
         applicationStatusPage.visit(applicationName);

@@ -20,7 +20,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
-public class BaseTest extends Wrappers {
+public abstract class BaseTest extends Wrappers {
 
     private static String currentBrowser = "Chrome" ;
     private static String currentDomain = "https://status.quickblox.com";

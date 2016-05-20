@@ -49,6 +49,7 @@ public class ApplicationStatusPage extends BasePage {
     protected By contentLocator = findById("content");
     protected By buildedGraphsCounterLocator = findByCss("div[class='row stat graph_wrap opened']");
     protected By openedGraphsLocator = findByCss("div[class='row stat graph_wrap graph_builded opened']");
+    protected By openedWithExpandGraphsLocator = findByCss("div[class='row stat graph_wrap opened graph_builded']");
     protected By allMetricsCounterLocator = findByCss("span.title");
     protected By hiddenGraphsCounterLocator = findByCss("div[class='row stat graph_wrap graph_builded']");
 
@@ -87,6 +88,8 @@ public class ApplicationStatusPage extends BasePage {
     public int getCountOfAllMetrics(){return getCountOfElements(allMetricsCounterLocator);}
 
     public int getCountOfExpandedGraphs(){return getCountOfElements(openedGraphsLocator);}
+
+    public int getCountOfFullScreenExpandedGraphs(){return getCountOfElements(openedWithExpandGraphsLocator);}
 
     public int getCountOfHiddenGraphs(){return getCountOfElements(hiddenGraphsCounterLocator);}
 

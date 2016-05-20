@@ -1,11 +1,12 @@
 <suite name="MySuite">
-    <parameter name="browser" value="Chrome" />
-    <parameter name="domain" value="https://statusdev.quickblox.com" />
     <test name="FormTests" >
+        <parameter name="browser" value="Chrome" />
+        <parameter name="domain" value="https://statusdev.quickblox.com" />
         <classes>
         <class name="com.StatusCheckerTests.StatusInstancesTests">
+            <parameter name="appName" value="novochatqa" />
             <methods>
-                <include name="checkInstanceHealthCheckDisplaying" />
+                <include name="fullScreenWithExpandedGraphs" />
             </methods>
         </class>
         </classes>
