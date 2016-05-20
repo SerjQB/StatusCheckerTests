@@ -48,7 +48,7 @@ public class ApplicationStatusPage extends BasePage {
     protected By compressedScreenIconLocator = findByXPath("//*[@class='expand icon']");
     protected By contentLocator = findById("content");
     protected By buildedGraphsCounterLocator = findByCss("div[class='row stat graph_wrap opened']");
-    protected By openedGraphsLocator = findByCss("div[class='row stat graph_wrap opened graph_builded']");
+    protected By openedGraphsLocator = findByCss("div[class='row stat graph_wrap graph_builded opened']");
     protected By allMetricsCounterLocator = findByCss("span.title");
     protected By hiddenGraphsCounterLocator = findByCss("div[class='row stat graph_wrap graph_builded']");
 
@@ -64,6 +64,21 @@ public class ApplicationStatusPage extends BasePage {
     }
 
     public String getValueOfMetric(String metricName){return getText(findByCss("#" + metricName + " .time "));}
+
+    public void clickMetricIndex(int index){
+        click(findByXPath(getIndexElementXpath(index)));
+    }
+
+    public Boolean isIndexGraphPresented(int index){
+        waitUntilElementNotPresented(findByCss("div[class='row stat graph_wrap'][" +
+                Integer.toString(index) + "]"));
+        return isElementPresented(findByXPath(getIndexElementXpath(index) + "//canvas"));
+    }
+
+    public Boolean isIndexGraphHidden(int index){
+        pause(100);
+        return isElementPresented(findByXPath("//div[@class='row stat graph_wrap graph_builded'][" + index + "]"));
+    }
 
     public String getHealthCheckValue(){return getText(healthCheckLocator);}
 
@@ -97,4 +112,8 @@ public class ApplicationStatusPage extends BasePage {
     public void waitForHiddenGraphs(){waitUntilElementNotPresented(expandedGraphsIconLocator);}
 
     public void waitForExpandedChangeScreen(){waitUntilElementNotPresented(buildedGraphsCounterLocator);}
+
+    private String getIndexElementXpath(int index){
+        return ("//*[@data-obj][" + Integer.toString(index) + "]");
+    }
 }

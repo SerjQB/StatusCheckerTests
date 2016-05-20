@@ -114,7 +114,7 @@ public class StatusInstancesTests extends BaseTest {
         applicationStatusPage.clickOnExpandAllButton();
         applicationStatusPage.waitForHiddenGraphs();
         pause(1000);
-        Assert.assertEquals(applicationStatusPage.getCountOfHiddenGraphs(), graphsNumber);
+        Assert.assertEquals(applicationStatusPage.getCountOfExpandedGraphs(), 0);
     }
 
     @Test
@@ -143,5 +143,40 @@ public class StatusInstancesTests extends BaseTest {
         applicationStatusPage.waitForExpandedChangeScreen();
         pause(1000);
         Assert.assertTrue(fullScreenWidth > applicationStatusPage.getContentWidth() * 1.5);
+    }
+
+    @Test
+    public void openAllGraphsManually() {
+        int graphsNumber;
+        String applicationName = "novochatqa";
+
+        ApplicationStatusPage applicationStatusPage = new ApplicationStatusPage(driver);
+        applicationStatusPage.visit(applicationName);
+
+        graphsNumber = applicationStatusPage.getCountOfAllMetrics();
+        for(int i = 1; i <= graphsNumber; i++){
+            applicationStatusPage.clickMetricIndex(i);
+            Assert.assertTrue(applicationStatusPage.isIndexGraphPresented(i));
+        }
+        Assert.assertEquals(applicationStatusPage.getCountOfExpandedGraphs(), graphsNumber);
+    }
+
+    @Test
+    public void hideAllGraphsManually() {
+        int graphsNumber;
+        String applicationName = "novochatqa";
+
+        ApplicationStatusPage applicationStatusPage = new ApplicationStatusPage(driver);
+        applicationStatusPage.visit(applicationName);
+        graphsNumber = applicationStatusPage.getCountOfAllMetrics();
+        applicationStatusPage.clickOnExpandAllButton();
+        applicationStatusPage.waitForExpandedGraphs();
+        pause(1000);
+
+        for(int i = 1; i <= graphsNumber; i++){
+            applicationStatusPage.clickMetricIndex(i);
+            Assert.assertTrue(applicationStatusPage.isIndexGraphHidden(i));
+        }
+        Assert.assertEquals(applicationStatusPage.getCountOfHiddenGraphs(), graphsNumber);
     }
 }

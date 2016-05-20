@@ -3,9 +3,9 @@
     <parameter name="domain" value="https://statusdev.quickblox.com" />
     <test name="FormTests" >
         <classes>
-        <class name="com.StatusCheckerTests.InstancesTests">
+        <class name="com.StatusCheckerTests.StatusInstancesTests">
             <methods>
-                <include name="checkInstanceDisplaying" />
+                <include name="checkInstanceHealthCheckDisplaying" />
             </methods>
         </class>
         </classes>
