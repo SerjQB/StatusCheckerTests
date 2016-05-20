@@ -90,6 +90,16 @@ public abstract class Wrappers {
 
     protected String getText(By element){return getWebDriver().findElement(element).getText();}
 
+    //protected double getWidth(By element){return getWebDriver().findElement(element).getSize().getHeight();}
+
+    protected double getWidthAttribute(By element){
+        return Double.parseDouble(getWebDriver().findElement(element).getAttribute("width"));
+    }
+
+    protected double getWidth(By element){
+        return Double.parseDouble(getWebDriver().findElement(element).getAttribute("clientWidth"));
+    }
+
     protected String getValue(By element){
         return getWebDriver().findElement(element).getAttribute("value");
     }

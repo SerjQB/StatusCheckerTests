@@ -3,16 +3,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import com.TestInitializations.Wrappers;
-import com.StatusCheckerTests.MainTest;
+import com.StatusCheckerTests.BaseTest;
 
 
 public class BasePage extends Wrappers {
 
-    protected String openedBrowser = MainTest.getCurrentBrowser();
+    protected String openedBrowser = BaseTest.getCurrentBrowser();
 
-    public static String currentDomain = MainTest.getCurrentDomain();
+    public static String currentDomain = BaseTest.getCurrentDomain();
 
     private By logoLoadLocator = findByCss("qbLogo.loading");
+    private By logoLocator = findById("qbLogo");
 
     protected WebDriver driver;
 
@@ -27,47 +28,48 @@ public class BasePage extends Wrappers {
     }
 
     public void waitUntilLoad(){
+        waitUntilElement(logoLocator);
         waitUntilElementNotPresented(logoLoadLocator);
     }
 
     public AddInstancePage openAddInstancePage(){
         open(currentDomain + "/admin/instances/add");
-        return  new AddInstancePage(driver);
+        return new AddInstancePage(driver);
     }
 
     public AdminPage openAdminPage(){
         open(currentDomain + "/admin");
-        return  new AdminPage(driver);
+        return new AdminPage(driver);
     }
 
     public ApplicationStatusPage openApplicationStatusPage(String instanceName){
         open(currentDomain + "/instance/" + instanceName);
-        return  new ApplicationStatusPage(driver);
+        return new ApplicationStatusPage(driver);
     }
 
     public DisplayPage openDisplayPage(){
         open(currentDomain + "/admin/display");
-        return  new DisplayPage(driver);
+        return new DisplayPage(driver);
     }
 
     public EditInstancePage openEditInstancePage(String instanceName){
         open(currentDomain + "/admin/instances/"+ instanceName);
-        return  new EditInstancePage(driver);
+        return new EditInstancePage(driver);
     }
 
     public ManageInstancesPage openManageInstancesPage(){
         open(currentDomain + "/admin/instances");
-        return  new ManageInstancesPage(driver);
+        return new ManageInstancesPage(driver);
     }
 
     public ProdStatusPage openProdStatusPage(){
         open(currentDomain);
-        return  new ProdStatusPage(driver);
+        return new ProdStatusPage(driver);
     }
 
     public TeamsPage openTeamsPage(){
         open(currentDomain + "/admin/teams");
-        return  new TeamsPage(driver);
+        return new TeamsPage(driver);
     }
 
 }

@@ -42,6 +42,15 @@ public class ApplicationStatusPage extends BasePage {
     protected By pushiosLocator = findById("ios");
     protected By healthCheckLocator = findByCss("#healthcheck .time");
     protected By metricsCounterLocator = findByXPath("//span[@class='title'][not(text()='Healthcheck' and not(contains(text(), 'Push')))][ancestor::*[@data-obj]]");
+    protected By expandedGraphsIconLocator = findByXPath("//*[@class='angle icon up']");
+    protected By hiddenGraphsIconLocator = findByXPath("//*[@class='angle icon down']");
+    protected By expandedScreenLocator = findByXPath("//*[@class='icon compress']");
+    protected By compressedScreenIconLocator = findByXPath("//*[@class='expand icon']");
+    protected By contentLocator = findById("content");
+    protected By buildedGraphsCounterLocator = findByCss("div[class='row stat graph_wrap opened']");
+    protected By openedGraphsLocator = findByCss("div[class='row stat graph_wrap opened graph_builded']");
+    protected By allMetricsCounterLocator = findByCss("span.title");
+    protected By hiddenGraphsCounterLocator = findByCss("div[class='row stat graph_wrap graph_builded']");
 
 
     public ApplicationStatusPage(WebDriver driver) {
@@ -60,21 +69,32 @@ public class ApplicationStatusPage extends BasePage {
 
     public int getCountOfMetrics(){return getCountOfElements(metricsCounterLocator);}
 
+    public int getCountOfAllMetrics(){return getCountOfElements(allMetricsCounterLocator);}
+
+    public int getCountOfExpandedGraphs(){return getCountOfElements(openedGraphsLocator);}
+
+    public int getCountOfHiddenGraphs(){return getCountOfElements(hiddenGraphsCounterLocator);}
+
     public void clickOnRefreshButton() {
         click(refreshButtonLocator);
         waitUntilLoad();
     }
 
-    public void openCalendar() {
-        click(calendarButtonLocator);
-    }
+    public double getContentWidth(){return getWidth(contentLocator);}
 
-    public void clickOnExpandAllButton() {
-        click(expandAllButtonLocator);
-    }
+    public void openCalendar() {click(calendarButtonLocator);}
 
-    public void clickOnFullScreenButton() {
-        click(fullScreenButtonLocator);
-    }
+    public void clickOnExpandAllButton() {click(expandAllButtonLocator);}
 
+    public void clickOnFullScreenButton() {click(fullScreenButtonLocator);}
+
+    public void waitForFullScreen(){waitUntilElementNotPresented(compressedScreenIconLocator);}
+
+    public void waitForCompressedScreen(){waitUntilElementNotPresented(expandedScreenLocator);}
+
+    public void waitForExpandedGraphs(){waitUntilElementNotPresented(hiddenGraphsIconLocator);}
+
+    public void waitForHiddenGraphs(){waitUntilElementNotPresented(expandedGraphsIconLocator);}
+
+    public void waitForExpandedChangeScreen(){waitUntilElementNotPresented(buildedGraphsCounterLocator);}
 }
