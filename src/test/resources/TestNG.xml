@@ -6,7 +6,7 @@
         <class name="com.StatusCheckerTests.StatusInstancesTests">
             <parameter name="appName" value="novochatqa" />
             <methods>
-                <include name="fullScreenWithExpandedGraphs" />
+                <include name="checkInstancePeriodMetricsDisplaying" />
             </methods>
         </class>
         </classes>

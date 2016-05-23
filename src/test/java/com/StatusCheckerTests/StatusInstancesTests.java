@@ -1,5 +1,6 @@
 package com.StatusCheckerTests;
 import com.NonSeleniumMethods.CustomJSONParser;
+import com.NonSeleniumMethods.CustomDateOperators;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.By;
 import org.testng.Assert;
@@ -24,7 +25,19 @@ public class StatusInstancesTests extends BaseTest {
     }
 
     @Test
-    public void checkInstanceMetricsDisplaying() {
+    public void checkInstanceMetricsCount() {
+        EditInstancePage editInstancePage = new EditInstancePage(driver);
+        editInstancePage.visit(applicationName);
+        String[] enabledMetrics = editInstancePage.getMetricsNameArray();
+
+        ApplicationStatusPage applicationStatusPage = editInstancePage.openApplicationStatusPage(applicationName);
+
+        Assert.assertEquals(CustomJSONParser.getCountOfMetrics(applicationName), enabledMetrics.length);
+        Assert.assertEquals(applicationStatusPage.getCountOfMetrics(), enabledMetrics.length);
+    }
+
+    @Test
+    public void checkInstanceLatestMetricsDisplaying() {
         int loopOperator = 0;
         EditInstancePage editInstancePage = new EditInstancePage(driver);
         editInstancePage.visit(applicationName);
@@ -41,19 +54,59 @@ public class StatusInstancesTests extends BaseTest {
     }
 
     @Test
-    public void checkInstanceMetricsCount() {
+    public void checkInstanceMonthlyMetricsDisplaying() {
+        int loopOperator = 0;
+        int monthDecrement = 1;//choose value from 0 to 5 for selecting how long from current month will be the month
+        //in the test. 0 - current month, 5 - five monthes ago.
+        String operableMonth;
+        String jsonMonthName;
         EditInstancePage editInstancePage = new EditInstancePage(driver);
         editInstancePage.visit(applicationName);
         String[] enabledMetrics = editInstancePage.getMetricsNameArray();
 
         ApplicationStatusPage applicationStatusPage = editInstancePage.openApplicationStatusPage(applicationName);
+        operableMonth = CustomDateOperators.getMonthName(monthDecrement);
+        jsonMonthName = CustomDateOperators.getMonthJsonFileName(monthDecrement);
+        applicationStatusPage.openCalendar();
+        applicationStatusPage.clickOnMonthByName(operableMonth);
+        applicationStatusPage.waitUntilLoad();
+        JSONObject monthlyMetrics = CustomJSONParser.getCalendarMetricsObject(applicationName, jsonMonthName);
 
-        Assert.assertEquals(CustomJSONParser.getCountOfMetrics(applicationName), enabledMetrics.length);
-        Assert.assertEquals(applicationStatusPage.getCountOfMetrics(), enabledMetrics.length);
+        for(String s : enabledMetrics){
+            Assert.assertEquals(applicationStatusPage.getValueOfMetric(enabledMetrics[loopOperator]),
+                    monthlyMetrics.get(enabledMetrics[loopOperator]).toString());
+            loopOperator++;
+        }
     }
 
     @Test
-    public void checkInstanceHealthCheckDisplaying() {
+    public void checkInstancePeriodMetricsDisplaying() {
+        int loopOperator = 0;
+        String fromDate[] = {"04", "14", "2016"};//corresponding month, day and year values
+        String toDate[] = {"05", "07", "2016"};//corresponding month, day and year values
+
+        String jsonPeriodhName;
+        EditInstancePage editInstancePage = new EditInstancePage(driver);
+        editInstancePage.visit(applicationName);
+        String[] enabledMetrics = editInstancePage.getMetricsNameArray();
+
+        ApplicationStatusPage applicationStatusPage = editInstancePage.openApplicationStatusPage(applicationName);
+        jsonPeriodhName = CustomDateOperators.getPeriodJsonFileName(fromDate, toDate);
+        applicationStatusPage.openCalendar();
+        applicationStatusPage.fillCalendarWithCorrectData(fromDate, toDate);
+        applicationStatusPage.clickOnApplyButton();
+        applicationStatusPage.waitUntilLoad();
+        JSONObject monthlyMetrics = CustomJSONParser.getCalendarMetricsObject(applicationName, jsonPeriodhName);
+
+        for(String s : enabledMetrics){
+            Assert.assertEquals(applicationStatusPage.getValueOfMetric(enabledMetrics[loopOperator]),
+                    monthlyMetrics.get(enabledMetrics[loopOperator]).toString());
+            loopOperator++;
+        }
+    }
+
+    @Test
+    public void checkInstanceLatestHealthCheckDisplaying() {
 
         ApplicationStatusPage applicationStatusPage = new ApplicationStatusPage(driver);
         applicationStatusPage.visit(applicationName);
@@ -63,21 +116,71 @@ public class StatusInstancesTests extends BaseTest {
     }
 
     @Test
-    public void checkAdminStatsDisplaying() {
+    public void checkInstanceMonthlyHealthCheckDisplaying() {
+        int monthDecrement = 0;//choose value from 0 to 5 for selecting how long from current month will be the month
+        //in the test. 0 - current month, 5 - five monthes ago.
+        String operableMonth;
+        String jsonMonthName;
+
+        ApplicationStatusPage applicationStatusPage = new ApplicationStatusPage(driver);
+        applicationStatusPage.visit(applicationName);
+
+        operableMonth = CustomDateOperators.getMonthName(monthDecrement);
+        jsonMonthName = CustomDateOperators.getMonthJsonFileName(monthDecrement);
+        applicationStatusPage.openCalendar();
+        applicationStatusPage.clickOnMonthByName(operableMonth);
+        applicationStatusPage.waitUntilLoad();
+
+        Assert.assertEquals(applicationStatusPage.getHealthCheckValue(),
+                CustomJSONParser.getCalendarHealthCheckValue(applicationName, jsonMonthName));
+    }
+
+    @Test
+    public void checkLatestAdminStatsDisplaying() {
 
         ProdStatusPage prodStatusPage = new ProdStatusPage(driver);
         prodStatusPage.visit();
 
+        JSONObject adminStatsObject = CustomJSONParser.getAdminStatisticsObject();
+
         Assert.assertEquals(prodStatusPage.getAdminStat(cpuUsageStat),
-                CustomJSONParser.getAdminStatisticsMetric(cpuUsageStat));
+                CustomJSONParser.getAdminStatisticsMetric(adminStatsObject, cpuUsageStat));
         Assert.assertEquals(prodStatusPage.getAdminStat(messagesNumberPerSecondStat),
-                CustomJSONParser.getAdminStatisticsMetric(messagesNumberPerSecondStat));
+                CustomJSONParser.getAdminStatisticsMetric(adminStatsObject, messagesNumberPerSecondStat));
         Assert.assertEquals(prodStatusPage.getAdminStat(presencesNumberPerSecStat),
-                CustomJSONParser.getAdminStatisticsMetric(presencesNumberPerSecStat));
+                CustomJSONParser.getAdminStatisticsMetric(adminStatsObject, presencesNumberPerSecStat));
         Assert.assertEquals(prodStatusPage.getAdminStat(queueSizeStat),
-                CustomJSONParser.getAdminStatisticsMetric(queueSizeStat));
+                CustomJSONParser.getAdminStatisticsMetric(adminStatsObject, queueSizeStat));
         Assert.assertEquals(prodStatusPage.getAdminStat(connectionsNumberStat),
-                CustomJSONParser.getAdminStatisticsMetric(connectionsNumberStat));
+                CustomJSONParser.getAdminStatisticsMetric(adminStatsObject, connectionsNumberStat));
+    }
+
+    @Test
+    public void checkMonthlyAdminStatsDisplaying() {
+        int monthDecrement = 1;//choose value from 0 to 5 for selecting how long from current month will be the month
+        //in the test. 0 - current month, 5 - five monthes ago.
+        String operableMonth;
+        String jsonMonthName;
+        ProdStatusPage prodStatusPage = new ProdStatusPage(driver);
+        prodStatusPage.visit();
+
+        operableMonth = CustomDateOperators.getMonthName(monthDecrement);
+        jsonMonthName = CustomDateOperators.getMonthJsonFileName(monthDecrement);
+        prodStatusPage.openCalendar();
+        prodStatusPage.clickOnMonthByName(operableMonth);
+        prodStatusPage.waitUntilLoad();
+        JSONObject adminStatsObject = CustomJSONParser.getCalendarAdminStatisticsObject(jsonMonthName);
+
+        Assert.assertEquals(prodStatusPage.getAdminStat(cpuUsageStat),
+                CustomJSONParser.getAdminStatisticsMetric(adminStatsObject, cpuUsageStat));
+        Assert.assertEquals(prodStatusPage.getAdminStat(messagesNumberPerSecondStat),
+                CustomJSONParser.getAdminStatisticsMetric(adminStatsObject, messagesNumberPerSecondStat));
+        Assert.assertEquals(prodStatusPage.getAdminStat(presencesNumberPerSecStat),
+                CustomJSONParser.getAdminStatisticsMetric(adminStatsObject, presencesNumberPerSecStat));
+        Assert.assertEquals(prodStatusPage.getAdminStat(queueSizeStat),
+                CustomJSONParser.getAdminStatisticsMetric(adminStatsObject, queueSizeStat));
+        Assert.assertEquals(prodStatusPage.getAdminStat(connectionsNumberStat),
+                CustomJSONParser.getAdminStatisticsMetric(adminStatsObject, connectionsNumberStat));
     }
 
     @Test

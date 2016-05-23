@@ -5,41 +5,47 @@ import org.openqa.selenium.By;
 
 public class ApplicationStatusPage extends BasePage {
 
+    //    protected By createUserLocator = findById("createUser");
+//    protected By createUserSessionLocator = findById("createUserSession");
+//    protected By listUsersLocator = findById("listUsers");
+//    protected By updateUserLocator = findById("updateUser");
+//    protected By deleteUserLocator = findById("deleteUser");
+//    protected By destroySessionLocator = findById("destroySession");
+//    protected By createGeodataLocator = findById("createGeodata");
+//    protected By listGeodataLocator = findById("listGeodata");
+//    protected By createAndUploadContentLocator = findById("createAndUploadContent");
+//    protected By listContentLocator = findById("listContent");
+//    protected By deleteContentLocator = findById("deleteContent");
+//    protected By createDataLocator = findById("createData");
+//    protected By updateDataLocator = findById("updateData");
+//    protected By listDataLocator = findById("listData");
+//    protected By deleteDataLocator = findById("deleteData");
+//    protected By createDialogLocator = findById("createDialog");
+//    protected By connectToChatLocator = findById("connectToChat");
+//    protected By privateChatLocator = findById("privateChat");
+//    protected By privateChatWithoutHistoryLocator = findById("privateChatWithoutHistory");
+//    protected By privateChatWithoutHeadlineLocator = findById("privateChatWithoutHeadline");
+//    protected By groupChatLocator = findById("groupChat");
+//    protected By retrieveDialogsLocator = findById("retrieveDialogs");
+//    protected By removeDialogOccupantLocator = findById("removeDialogOccupant");
+//    protected By addDialogOccupantLocator = findById("addDialogOccupant");
+//    protected By createMessageLocator = findById("createMessage");
+//    protected By listMessagesLocator = findById("listMessages");
+//    protected By deleteMessageLocator = findById("deleteMessage");
+//    protected By deleteDialogLocator = findById("deleteDialog");
+//    protected By pushAndroidLocator = findById("android");
+//    protected By pushiosLocator = findById("ios");
+
     protected By titleFieldLocator = findByCss(".page-title strong");
     protected By refreshButtonLocator = findById("refresh");
     protected By expandAllButtonLocator = findById("toggle-graphs");
     protected By fullScreenButtonLocator = findById("toggle-width");
     protected By calendarButtonLocator = findById("datepicker");
-    protected By createUserLocator = findById("createUser");
-    protected By createUserSessionLocator = findById("createUserSession");
-    protected By listUsersLocator = findById("listUsers");
-    protected By updateUserLocator = findById("updateUser");
-    protected By deleteUserLocator = findById("deleteUser");
-    protected By destroySessionLocator = findById("destroySession");
-    protected By createGeodataLocator = findById("createGeodata");
-    protected By listGeodataLocator = findById("listGeodata");
-    protected By createAndUploadContentLocator = findById("createAndUploadContent");
-    protected By listContentLocator = findById("listContent");
-    protected By deleteContentLocator = findById("deleteContent");
-    protected By createDataLocator = findById("createData");
-    protected By updateDataLocator = findById("updateData");
-    protected By listDataLocator = findById("listData");
-    protected By deleteDataLocator = findById("deleteData");
-    protected By createDialogLocator = findById("createDialog");
-    protected By connectToChatLocator = findById("connectToChat");
-    protected By privateChatLocator = findById("privateChat");
-    protected By privateChatWithoutHistoryLocator = findById("privateChatWithoutHistory");
-    protected By privateChatWithoutHeadlineLocator = findById("privateChatWithoutHeadline");
-    protected By groupChatLocator = findById("groupChat");
-    protected By retrieveDialogsLocator = findById("retrieveDialogs");
-    protected By removeDialogOccupantLocator = findById("removeDialogOccupant");
-    protected By addDialogOccupantLocator = findById("addDialogOccupant");
-    protected By createMessageLocator = findById("createMessage");
-    protected By listMessagesLocator = findById("listMessages");
-    protected By deleteMessageLocator = findById("deleteMessage");
-    protected By deleteDialogLocator = findById("deleteDialog");
-    protected By pushAndroidLocator = findById("android");
-    protected By pushiosLocator = findById("ios");
+    protected By checkedDateLocator = findById("lastchecked");
+    protected By fromDateLocator = findByCss(".calendar.left input");
+    protected By toDateLocator = findByCss(".calendar.right input");
+    protected By applyButtonLocator = findByCss(".applyBtn");
+
     protected By healthCheckLocator = findByCss("#healthcheck .time");
     protected By metricsCounterLocator = findByXPath("//span[@class='title'][not(text()='Healthcheck' and not(contains(text(), 'Push')))][ancestor::*[@data-obj]]");
     protected By expandedGraphsIconLocator = findByXPath("//*[@class='angle icon up']");
@@ -98,9 +104,25 @@ public class ApplicationStatusPage extends BasePage {
         waitUntilLoad();
     }
 
+    public void clickOnMonthByName(String month){
+        click(findByXPath("//*[@class='ranges']//li[text() = '" + month + "']"));
+    }
+
     public double getContentWidth(){return getWidth(contentLocator);}
 
-    public void openCalendar() {click(calendarButtonLocator);}
+    public void openCalendar() {
+        click(calendarButtonLocator);
+        pause(500);
+    }
+
+    public void fillCalendarWithCorrectData(String[] from, String[] to){
+        String fromDate = from[0] + "/" + from[1] + "/" + from[2];
+        String toDate = to[0] + "/" + to[1] + "/" + to[2];
+        clearAndType(fromDateLocator, fromDate);
+        clearAndType(toDateLocator, toDate);
+    }
+
+    public void clickOnApplyButton(){click(applyButtonLocator);}
 
     public void clickOnExpandAllButton() {click(expandAllButtonLocator);}
 
@@ -119,4 +141,5 @@ public class ApplicationStatusPage extends BasePage {
     private String getIndexElementXpath(int index){
         return ("//*[@data-obj][" + Integer.toString(index) + "]");
     }
+
 }

@@ -12,6 +12,7 @@ import java.util.Random;
 import java.util.UUID;
 import java.nio.file.*;
 import java.awt.Toolkit;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
@@ -41,6 +42,7 @@ public abstract class BaseTest extends Wrappers {
         String pathToChromeDriver = Paths.get("./src/test/resources/ChromeDriver/chromedriver_mac").toAbsolutePath().toString();
         System.setProperty("webdriver.chrome.driver", pathToChromeDriver);
         WebDriver chromeDriver = new ChromeDriver();
+        chromeDriver.manage().timeouts().pageLoadTimeout(45, TimeUnit.SECONDS);
 
         java.awt.Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Point position = new Point(0, 0);
@@ -55,6 +57,7 @@ public abstract class BaseTest extends Wrappers {
     protected  WebDriver setFirefoxDriver(){
 
         FirefoxDriver firefoxDriver = new FirefoxDriver();
+        firefoxDriver.manage().timeouts().pageLoadTimeout(45, TimeUnit.SECONDS);
         firefoxDriver.manage().window().maximize();
 
         return firefoxDriver;
@@ -67,6 +70,7 @@ public abstract class BaseTest extends Wrappers {
     protected  WebDriver setSafariDriver(){
 
         SafariDriver safariDriver = new SafariDriver();
+        safariDriver.manage().timeouts().pageLoadTimeout(45, TimeUnit.SECONDS);
         safariDriver.manage().window().maximize();
 
         return safariDriver;
