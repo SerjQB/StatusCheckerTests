@@ -15,6 +15,7 @@ import java.awt.Toolkit;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -68,8 +69,13 @@ public abstract class BaseTest extends Wrappers {
     // Before use Safari driver - you should download the latest version from here - http://www.seleniumhq.org/download/
     // and add him to your Safari browser as browser extension
     protected  WebDriver setSafariDriver(){
+        SafariDriver safariDriver;
+        try {
+            safariDriver = new SafariDriver();
+        } catch (UnreachableBrowserException e){
+            safariDriver = new SafariDriver();
+        }
 
-        SafariDriver safariDriver = new SafariDriver();
         safariDriver.manage().timeouts().pageLoadTimeout(45, TimeUnit.SECONDS);
         safariDriver.manage().window().maximize();
 
