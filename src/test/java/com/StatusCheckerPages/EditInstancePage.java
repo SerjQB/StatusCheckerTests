@@ -178,7 +178,6 @@ public class EditInstancePage extends AddInstancePage{
 
         if(isChecked(deleteDialogCheckboxLocator)){
             arr[counter] = "deleteDialog";
-            counter++;
         }
 
         return arr;

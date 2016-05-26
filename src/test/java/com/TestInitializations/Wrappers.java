@@ -90,8 +90,6 @@ public abstract class Wrappers {
 
     protected String getText(By element){return getWebDriver().findElement(element).getText();}
 
-    //protected double getWidth(By element){return getWebDriver().findElement(element).getSize().getHeight();}
-
     protected double getWidthAttribute(By element){
         return Double.parseDouble(getWebDriver().findElement(element).getAttribute("width"));
     }
@@ -113,7 +111,6 @@ public abstract class Wrappers {
     }
 
     protected Boolean isElementExist( By element){return (getWebDriver().findElements(element).size() != 0);}
-
 
     protected Boolean isElementPresented(By element){
         Boolean elementCondition = false;

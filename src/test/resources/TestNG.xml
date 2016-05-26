@@ -7,6 +7,7 @@
                 <parameter name="appName" value="novochatqa" />
             </class>
             <class name="com.StatusCheckerTests.TeamTests"></class>
+            <class name="com.StatusCheckerTests.DisplayPageTests"></class>
         </classes>
     </test>
     <test name="SafariTests" >
@@ -17,6 +18,7 @@
                 <parameter name="appName" value="novochatqa" />
             </class>
             <class name="com.StatusCheckerTests.TeamTests"></class>
+            <class name="com.StatusCheckerTests.DisplayPageTests"></class>
         </classes>
     </test>
     <test name="FirefoxTest" >
@@ -27,6 +29,7 @@
                 <parameter name="appName" value="novochatqa" />
             </class>
             <class name="com.StatusCheckerTests.TeamTests"></class>
+            <class name="com.StatusCheckerTests.DisplayPageTests"></class>
         </classes>
     </test>
 </suite>
