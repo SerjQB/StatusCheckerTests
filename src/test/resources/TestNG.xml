@@ -1,14 +1,32 @@
-<suite name="MySuite">
-    <test name="FormTests" >
+<suite name="StatusCheckerAllBrowsersSuite">
+    <test name="ChromeTests" >
         <parameter name="browser" value="Chrome" />
         <parameter name="domain" value="https://statusdev.quickblox.com" />
         <classes>
-        <class name="com.StatusCheckerTests.StatusInstancesTests">
-            <parameter name="appName" value="novochatqa" />
-            <methods>
-                <include name="checkInstancePeriodMetricsDisplaying" />
-            </methods>
-        </class>
+            <class name="com.StatusCheckerTests.StatusInstancesTests">
+                <parameter name="appName" value="novochatqa" />
+            </class>
+            <class name="com.StatusCheckerTests.TeamTests"></class>
+        </classes>
+    </test>
+    <test name="SafariTests" >
+        <parameter name="browser" value="Safari" />
+        <parameter name="domain" value="https://statusdev.quickblox.com" />
+        <classes>
+            <class name="com.StatusCheckerTests.StatusInstancesTests">
+                <parameter name="appName" value="novochatqa" />
+            </class>
+            <class name="com.StatusCheckerTests.TeamTests"></class>
+        </classes>
+    </test>
+    <test name="FirefoxTest" >
+        <parameter name="browser" value="Firefox" />
+        <parameter name="domain" value="https://statusdev.quickblox.com" />
+        <classes>
+            <class name="com.StatusCheckerTests.StatusInstancesTests">
+                <parameter name="appName" value="novochatqa" />
+            </class>
+            <class name="com.StatusCheckerTests.TeamTests"></class>
         </classes>
     </test>
 </suite>

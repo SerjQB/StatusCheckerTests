@@ -85,18 +85,19 @@ public class StatusInstancesTests extends BaseTest {
         String fromDate[] = {"04", "14", "2016"};//corresponding month, day and year values
         String toDate[] = {"05", "07", "2016"};//corresponding month, day and year values
 
-        String jsonPeriodhName;
+        String jsonPeriodName;
+
         EditInstancePage editInstancePage = new EditInstancePage(driver);
         editInstancePage.visit(applicationName);
         String[] enabledMetrics = editInstancePage.getMetricsNameArray();
 
         ApplicationStatusPage applicationStatusPage = editInstancePage.openApplicationStatusPage(applicationName);
-        jsonPeriodhName = CustomDateOperators.getPeriodJsonFileName(fromDate, toDate);
+        jsonPeriodName = CustomDateOperators.getPeriodJsonFileName(fromDate, toDate);
         applicationStatusPage.openCalendar();
         applicationStatusPage.fillCalendarWithCorrectData(fromDate, toDate);
         applicationStatusPage.clickOnApplyButton();
         applicationStatusPage.waitUntilLoad();
-        JSONObject monthlyMetrics = CustomJSONParser.getCalendarMetricsObject(applicationName, jsonPeriodhName);
+        JSONObject monthlyMetrics = CustomJSONParser.getCalendarMetricsObject(applicationName, jsonPeriodName);
 
         for(String s : enabledMetrics){
             Assert.assertEquals(applicationStatusPage.getValueOfMetric(enabledMetrics[loopOperator]),
@@ -136,6 +137,26 @@ public class StatusInstancesTests extends BaseTest {
     }
 
     @Test
+    public void checkInstancePeriodHealthCheckDisplaying() {
+        String fromDate[] = {"05", "01", "2016"};//corresponding month, day and year values
+        String toDate[] = {"05", "10", "2016"};//corresponding month, day and year values
+
+        String jsonPeriodName;
+
+        ApplicationStatusPage applicationStatusPage = new ApplicationStatusPage(driver);
+        applicationStatusPage.visit(applicationName);
+
+        applicationStatusPage.openCalendar();
+        applicationStatusPage.fillCalendarWithCorrectData(fromDate, toDate);
+        applicationStatusPage.clickOnApplyButton();
+        applicationStatusPage.waitUntilLoad();
+        jsonPeriodName = CustomDateOperators.getPeriodJsonFileName(fromDate, toDate);
+
+        Assert.assertEquals(applicationStatusPage.getHealthCheckValue(),
+                CustomJSONParser.getCalendarHealthCheckValue(applicationName, jsonPeriodName));
+    }
+
+    @Test
     public void checkLatestAdminStatsDisplaying() {
 
         ProdStatusPage prodStatusPage = new ProdStatusPage(driver);
@@ -170,6 +191,35 @@ public class StatusInstancesTests extends BaseTest {
         prodStatusPage.clickOnMonthByName(operableMonth);
         prodStatusPage.waitUntilLoad();
         JSONObject adminStatsObject = CustomJSONParser.getCalendarAdminStatisticsObject(jsonMonthName);
+
+        Assert.assertEquals(prodStatusPage.getAdminStat(cpuUsageStat),
+                CustomJSONParser.getAdminStatisticsMetric(adminStatsObject, cpuUsageStat));
+        Assert.assertEquals(prodStatusPage.getAdminStat(messagesNumberPerSecondStat),
+                CustomJSONParser.getAdminStatisticsMetric(adminStatsObject, messagesNumberPerSecondStat));
+        Assert.assertEquals(prodStatusPage.getAdminStat(presencesNumberPerSecStat),
+                CustomJSONParser.getAdminStatisticsMetric(adminStatsObject, presencesNumberPerSecStat));
+        Assert.assertEquals(prodStatusPage.getAdminStat(queueSizeStat),
+                CustomJSONParser.getAdminStatisticsMetric(adminStatsObject, queueSizeStat));
+        Assert.assertEquals(prodStatusPage.getAdminStat(connectionsNumberStat),
+                CustomJSONParser.getAdminStatisticsMetric(adminStatsObject, connectionsNumberStat));
+    }
+
+    @Test
+    public void checkPeriodAdminStatsDisplaying() {
+        String fromDate[] = {"05", "01", "2016"};//corresponding month, day and year values
+        String toDate[] = {"05", "10", "2016"};//corresponding month, day and year values
+
+        String jsonPeriodName;
+
+        ProdStatusPage prodStatusPage = new ProdStatusPage(driver);
+        prodStatusPage.visit();
+
+        prodStatusPage.openCalendar();
+        prodStatusPage.fillCalendarWithCorrectData(fromDate, toDate);
+        prodStatusPage.clickOnApplyButton();
+        prodStatusPage.waitUntilLoad();
+        jsonPeriodName = CustomDateOperators.getPeriodJsonFileName(fromDate, toDate);
+        JSONObject adminStatsObject = CustomJSONParser.getCalendarAdminStatisticsObject(jsonPeriodName);
 
         Assert.assertEquals(prodStatusPage.getAdminStat(cpuUsageStat),
                 CustomJSONParser.getAdminStatisticsMetric(adminStatsObject, cpuUsageStat));
