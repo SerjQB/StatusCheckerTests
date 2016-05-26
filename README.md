@@ -35,3 +35,4 @@ There are some required parameters in the test-suite file:
 
 Classes runs all tests for described test-class from StatusCheckerTests package if you don't add manually
 needful methods to suite's xml structure.
+All commented methods in xml file are methods which covers features that work incorrectly now.
