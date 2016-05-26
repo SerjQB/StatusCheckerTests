@@ -5,9 +5,34 @@
         <classes>
             <class name="com.StatusCheckerTests.StatusInstancesTests">
                 <parameter name="appName" value="novochatqa" />
+                <methods>
+                    <!--<method name="checkInstanceMetricsCount"/>-->
+                    <method name="checkInstanceLatestMetricsDisplaying"/>
+                    <method name="checkInstanceMonthlyMetricsDisplaying"/>
+                    <method name="checkInstancePeriodMetricsDisplaying"/>
+                    <!--<method name="checkInstanceLatestHealthCheckDisplaying"/>-->
+                    <!--<method name="checkInstanceMonthlyHealthCheckDisplaying"/>-->
+                    <!--<method name="checkInstancePeriodHealthCheckDisplaying"/>-->
+                    <method name="checkLatestAdminStatsDisplaying"/>
+                    <method name="checkMonthlyAdminStatsDisplaying"/>
+                    <method name="checkPeriodAdminStatsDisplaying"/>
+                    <method name="fullScreenWithHiddenGraphs"/>
+                    <method name="expandAllGraphs"/>
+                    <method name="fullScreenWithExpandedGraphs"/>
+                    <method name="openAllGraphsManually"/>
+                    <method name="hideAllGraphsManually"/>
+                </methods>>
             </class>
-            <class name="com.StatusCheckerTests.TeamTests"></class>
-            <class name="com.StatusCheckerTests.DisplayPageTests"></class>
+            <class name="com.StatusCheckerTests.TeamTests">
+                <methods>
+                    <method name="addValidUser"/>
+                    <method name="addValidUserWithoutPhone"/>
+                    <method name="editUser"/>
+                    <method name="deleteUser"/>
+                    <method name="checkFormValidation"/>
+                </methods>>
+            </class>
+            <!--<class name="com.StatusCheckerTests.DisplayPageTests"></class>-->
         </classes>
     </test>
     <test name="SafariTests" >
@@ -16,20 +41,70 @@
         <classes>
             <class name="com.StatusCheckerTests.StatusInstancesTests">
                 <parameter name="appName" value="novochatqa" />
+                <methods>
+                    <!--<method name="checkInstanceMetricsCount"/>-->
+                    <method name="checkInstanceLatestMetricsDisplaying"/>
+                    <method name="checkInstanceMonthlyMetricsDisplaying"/>
+                    <method name="checkInstancePeriodMetricsDisplaying"/>
+                    <!--<method name="checkInstanceLatestHealthCheckDisplaying"/>-->
+                    <!--<method name="checkInstanceMonthlyHealthCheckDisplaying"/>-->
+                    <!--<method name="checkInstancePeriodHealthCheckDisplaying"/>-->
+                    <method name="checkLatestAdminStatsDisplaying"/>
+                    <method name="checkMonthlyAdminStatsDisplaying"/>
+                    <method name="checkPeriodAdminStatsDisplaying"/>
+                    <method name="fullScreenWithHiddenGraphs"/>
+                    <method name="expandAllGraphs"/>
+                    <method name="fullScreenWithExpandedGraphs"/>
+                    <method name="openAllGraphsManually"/>
+                    <method name="hideAllGraphsManually"/>
+                </methods>>
             </class>
-            <class name="com.StatusCheckerTests.TeamTests"></class>
-            <class name="com.StatusCheckerTests.DisplayPageTests"></class>
+            <class name="com.StatusCheckerTests.TeamTests">
+                <methods>
+                    <method name="addValidUser"/>
+                    <method name="addValidUserWithoutPhone"/>
+                    <method name="editUser"/>
+                    <method name="deleteUser"/>
+                    <method name="checkFormValidation"/>
+                </methods>>
+            </class>
+            <!--<class name="com.StatusCheckerTests.DisplayPageTests"></class>-->
         </classes>
     </test>
-    <test name="FirefoxTest" >
+    <test name="FirefoxTests" >
         <parameter name="browser" value="Firefox" />
         <parameter name="domain" value="https://statusdev.quickblox.com" />
         <classes>
             <class name="com.StatusCheckerTests.StatusInstancesTests">
                 <parameter name="appName" value="novochatqa" />
+                <methods>
+                    <!--<method name="checkInstanceMetricsCount"/>-->
+                    <method name="checkInstanceLatestMetricsDisplaying"/>
+                    <method name="checkInstanceMonthlyMetricsDisplaying"/>
+                    <method name="checkInstancePeriodMetricsDisplaying"/>
+                    <!--<method name="checkInstanceLatestHealthCheckDisplaying"/>-->
+                    <!--<method name="checkInstanceMonthlyHealthCheckDisplaying"/>-->
+                    <!--<method name="checkInstancePeriodHealthCheckDisplaying"/>-->
+                    <method name="checkLatestAdminStatsDisplaying"/>
+                    <method name="checkMonthlyAdminStatsDisplaying"/>
+                    <method name="checkPeriodAdminStatsDisplaying"/>
+                    <method name="fullScreenWithHiddenGraphs"/>
+                    <method name="expandAllGraphs"/>
+                    <method name="fullScreenWithExpandedGraphs"/>
+                    <method name="openAllGraphsManually"/>
+                    <method name="hideAllGraphsManually"/>
+                </methods>>
             </class>
-            <class name="com.StatusCheckerTests.TeamTests"></class>
-            <class name="com.StatusCheckerTests.DisplayPageTests"></class>
+            <class name="com.StatusCheckerTests.TeamTests">
+                <methods>
+                    <method name="addValidUser"/>
+                    <method name="addValidUserWithoutPhone"/>
+                    <method name="editUser"/>
+                    <method name="deleteUser"/>
+                    <method name="checkFormValidation"/>
+                </methods>>
+            </class>
+            <!--<class name="com.StatusCheckerTests.DisplayPageTests"></class>-->
         </classes>
     </test>
 </suite>
