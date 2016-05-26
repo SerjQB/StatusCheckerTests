@@ -1,11 +1,11 @@
-package com.StatusCheckerPages;
+package com.statuschecker.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 
 
 public class ApplicationStatusPage extends BasePage {
-
-    //    protected By createUserLocator = findById("createUser");
+//    Locators unused now but may be will useful in future
+//    protected By createUserLocator = findById("createUser");
 //    protected By createUserSessionLocator = findById("createUserSession");
 //    protected By listUsersLocator = findById("listUsers");
 //    protected By updateUserLocator = findById("updateUser");

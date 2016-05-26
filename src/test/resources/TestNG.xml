@@ -3,7 +3,7 @@
         <parameter name="browser" value="Chrome" />
         <parameter name="domain" value="https://statusdev.quickblox.com" />
         <classes>
-            <class name="com.StatusCheckerTests.StatusInstancesTests">
+            <class name="com.statuschecker.test.StatusInstancesTests">
                 <parameter name="appName" value="novochatqa" />
                 <methods>
                     <!--<method name="checkInstanceMetricsCount"/>-->
@@ -23,7 +23,7 @@
                     <method name="hideAllGraphsManually"/>
                 </methods>>
             </class>
-            <class name="com.StatusCheckerTests.TeamTests">
+            <class name="com.statuschecker.test.TeamTests">
                 <methods>
                     <method name="addValidUser"/>
                     <method name="addValidUserWithoutPhone"/>
@@ -39,7 +39,7 @@
         <parameter name="browser" value="Safari" />
         <parameter name="domain" value="https://statusdev.quickblox.com" />
         <classes>
-            <class name="com.StatusCheckerTests.StatusInstancesTests">
+            <class name="com.statuschecker.test.StatusInstancesTests">
                 <parameter name="appName" value="novochatqa" />
                 <methods>
                     <!--<method name="checkInstanceMetricsCount"/>-->
@@ -59,7 +59,7 @@
                     <method name="hideAllGraphsManually"/>
                 </methods>>
             </class>
-            <class name="com.StatusCheckerTests.TeamTests">
+            <class name="com.statuschecker.test.TeamTests">
                 <methods>
                     <method name="addValidUser"/>
                     <method name="addValidUserWithoutPhone"/>
@@ -75,7 +75,7 @@
         <parameter name="browser" value="Firefox" />
         <parameter name="domain" value="https://statusdev.quickblox.com" />
         <classes>
-            <class name="com.StatusCheckerTests.StatusInstancesTests">
+            <class name="com.statuschecker.test.StatusInstancesTests">
                 <parameter name="appName" value="novochatqa" />
                 <methods>
                     <!--<method name="checkInstanceMetricsCount"/>-->
@@ -95,7 +95,7 @@
                     <method name="hideAllGraphsManually"/>
                 </methods>>
             </class>
-            <class name="com.StatusCheckerTests.TeamTests">
+            <class name="com.statuschecker.test.TeamTests">
                 <methods>
                     <method name="addValidUser"/>
                     <method name="addValidUserWithoutPhone"/>

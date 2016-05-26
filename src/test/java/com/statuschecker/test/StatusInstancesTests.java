@@ -1,11 +1,10 @@
-package com.StatusCheckerTests;
-import com.NonSeleniumMethods.CustomJSONParser;
-import com.NonSeleniumMethods.CustomDateOperators;
+package com.statuschecker.test;
+import com.statuschecker.utils.CustomJSONParser;
+import com.statuschecker.utils.CustomDateOperators;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import com.StatusCheckerPages.*;
+import com.statuschecker.pages.*;
 
 
 public class StatusInstancesTests extends BaseTest {

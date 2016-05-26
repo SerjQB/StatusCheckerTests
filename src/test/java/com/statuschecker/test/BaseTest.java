@@ -1,11 +1,10 @@
-package com.StatusCheckerTests;
+package com.statuschecker.test;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.Dimension;
-import com.TestInitializations.Wrappers;
+import com.statuschecker.initializations.Wrappers;
 
 
 import java.util.Random;

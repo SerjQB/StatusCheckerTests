@@ -1,4 +1,4 @@
-package com.StatusCheckerPages;
+package com.statuschecker.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;

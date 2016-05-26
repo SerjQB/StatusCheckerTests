@@ -1,4 +1,4 @@
-package com.NonSeleniumMethods;
+package com.statuschecker.utils;
 
 import java.util.Calendar;
 import java.util.HashMap;

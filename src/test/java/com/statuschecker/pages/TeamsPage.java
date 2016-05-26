@@ -1,6 +1,5 @@
-package com.StatusCheckerPages;
+package com.statuschecker.pages;
 
-import org.apache.xpath.operations.Bool;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 

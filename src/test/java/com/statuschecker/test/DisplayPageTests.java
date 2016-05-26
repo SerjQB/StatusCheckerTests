@@ -1,7 +1,7 @@
-package com.StatusCheckerTests;
+package com.statuschecker.test;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import com.StatusCheckerPages.*;
+import com.statuschecker.pages.*;
 
 
 public class DisplayPageTests extends BaseTest {

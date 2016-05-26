@@ -1,4 +1,4 @@
-package com.NonSeleniumMethods;
+package com.statuschecker.utils;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -8,7 +8,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import com.StatusCheckerPages.BasePage;
+import com.statuschecker.pages.BasePage;
 
 import java.io.IOException;
 
